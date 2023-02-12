@@ -1,0 +1,10 @@
+$primary-color: #FF6060;
+$secondary-color: #F6F6F6;
+
+$desktop-min-width: 1024px;
+
+@mixin screen-min($min) {
+    @media screen and (min-width: $min) {
+        @content
+    }
+}
