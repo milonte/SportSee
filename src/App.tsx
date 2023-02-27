@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './styles/app.scss';
 import { useParams } from 'react-router-dom';
 import { getUserMainDatas, getUserActivities, getUserAverageSessions, getUserPerformances } from './Api';
+import Activity from './components/Activity';
 
 /**
  * Default App function
@@ -32,27 +33,14 @@ export default function App() {
     fetchData();
   }, [])
 
-  console.log(userMainDatas)
-  console.log(userActivities)
-  console.log(userAverageSessions)
-  console.log(userPerformances)
-  console.log(process.env.REACT_APP_WEBSITE_NAME)
+  /*   console.log(userMainDatas)
+    console.log(userActivities)
+    console.log(userAverageSessions)
+    console.log(userPerformances)
+    console.log(process.env.REACT_APP_WEBSITE_NAME) */
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Activity data={userActivities} />
     </div>
   );
 }

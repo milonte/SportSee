@@ -13,7 +13,7 @@ import {
 const fetchData = async (query: string) => {
     const searchId = Number(query.split('/')[2])
     const searchCategory = query.split('/')[3] || 'user';
-    console.log(process.env.NODE_ENV)
+    /*  console.log(process.env.NODE_ENV) */
 
     if (process.env.NODE_ENV !== 'production') {
 
