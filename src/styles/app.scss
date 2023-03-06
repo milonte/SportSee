@@ -1,6 +1,6 @@
 @use './_config.scss';
-@import-normalize;
 
 body {
     background-color: white;
+    font-family: config.$font-family;
 }

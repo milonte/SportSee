@@ -1,7 +1,9 @@
-$primary-color: #FF6060;
+$primary-color: #E60000;
 $secondary-color: #F6F6F6;
 
 $desktop-min-width: 1024px;
+
+$font-family: "Roboto", "Helvetica Neue", "Helvetica, Arial";
 
 @mixin screen-min($min) {
     @media screen and (min-width: $min) {
