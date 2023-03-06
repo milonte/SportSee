@@ -1,5 +1,34 @@
 @use '../_config.scss';
 
-.recharts-default-legend {
-    margin-bottom: 20px !important;
+
+#activity {
+    position: relative;
+    .title {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    .recharts-responsive-container {
+        background-color: config.$secondary-color;
+    
+        .recharts-default-legend {
+            margin-bottom: 40px !important;
+        }
+        
+        .activity-tooltip {
+            background-color: config.$primary-color;
+            border: 0;
+            height: 100%;
+            text-align: center;
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            justify-content: space-around;
+            flex-direction: column;
+            display: flex;
+        }
+    }
 }

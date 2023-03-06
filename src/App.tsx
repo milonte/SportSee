@@ -1,43 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import './styles/app.scss';
 import { useParams } from 'react-router-dom';
 import { getUserMainDatas, getUserActivities, getUserAverageSessions, getUserPerformances } from './Api';
 import Activity from './components/Activity';
+import { UserMainDatasInterface } from './models/UserMainDatasInterface';
+import { UserActivityDatasInterface } from './models/UserActivityDatasInterface';
+import { UserSessionDatasInterface } from './models/UserSessionDatasInterface';
+import { UserPerformanceDatasInterface } from './models/UserPerformanceDatasInterface';
 
 /**
  * Default App function
  */
 export default function App() {
 
-  const [userMainDatas, setUserMainDatas] = useState([])
-  const [userActivities, setUserActivities] = useState([])
-  const [userAverageSessions, setUserAverageSessions] = useState([])
-  const [userPerformances, setUserPerformances] = useState([])
+  const [userMainDatas, setUserMainDatas]: SetStateAction<any> = useState([])
+  const [userActivities, setUserActivities]: SetStateAction<any> = useState([])
+  const [userAverageSessions, setUserAverageSessions]: SetStateAction<any> = useState([])
+  const [userPerformances, setUserPerformances]: SetStateAction<any> = useState([])
   const { userId } = useParams();
 
   useEffect(() => {
     async function fetchData() {
       // get datas from API / mocks
-      const datasResponse = userId ? await getUserMainDatas(userId) : null;
-      const activitiesResponse = userId ? await getUserActivities(userId) : null;
-      const sessionsResponse = userId ? await getUserAverageSessions(userId) : null;
-      const performancesResponse = userId ? await getUserPerformances(userId) : null;
+      if (userId) {
+        const datasResponse: UserMainDatasInterface = await getUserMainDatas(userId);
+        const activitiesResponse: UserActivityDatasInterface = await getUserActivities(userId);
+        const sessionsResponse: UserSessionDatasInterface = await getUserAverageSessions(userId);
+        const performancesResponse: UserPerformanceDatasInterface = await getUserPerformances(userId);
 
-      // setting datas to states
-      setUserMainDatas(datasResponse.data)
-      setUserActivities(activitiesResponse.data)
-      setUserAverageSessions(sessionsResponse.data)
-      setUserPerformances(performancesResponse.data)
+        // setting datas to states
+        setUserMainDatas(datasResponse)
+        setUserActivities(activitiesResponse)
+        setUserAverageSessions(sessionsResponse)
+        setUserPerformances(performancesResponse)
+      }
+
     }
     fetchData();
   }, [])
 
-  /*   console.log(userMainDatas)
-    console.log(userActivities)
-    console.log(userAverageSessions)
-    console.log(userPerformances)
-    console.log(process.env.REACT_APP_WEBSITE_NAME) */
+  console.log(userActivities)
+
   return (
     <div className="App">
       <Activity data={userActivities} />
