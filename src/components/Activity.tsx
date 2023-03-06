@@ -2,8 +2,7 @@ import '../styles/components/activity.scss';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Text, Line } from 'recharts';
 
 export default function Activity(data: any) {
-    console.log(data, 'activity')
-    const sessions = data.data.sessions;
+    const activities = data.data.sessions;
 
     const ActivityTooptip = ({ active, payload }: any) => {
         if (active && payload && payload.length) {
@@ -27,7 +26,7 @@ export default function Activity(data: any) {
                 <BarChart
                     width={500}
                     height={300}
-                    data={sessions}
+                    data={activities}
                     margin={{
                         top: 40,
                         right: 20,
