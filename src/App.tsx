@@ -7,6 +7,7 @@ import { UserMainDatasInterface } from './models/UserMainDatasInterface';
 import { UserActivityDatasInterface } from './models/UserActivityDatasInterface';
 import { UserSessionDatasInterface } from './models/UserSessionDatasInterface';
 import { UserPerformanceDatasInterface } from './models/UserPerformanceDatasInterface';
+import Session from './components/Session';
 
 /**
  * Default App function
@@ -39,11 +40,10 @@ export default function App() {
     fetchData();
   }, [])
 
-  console.log(userActivities)
-
   return (
     <div className="App">
       <Activity data={userActivities} />
+      <Session data={userAverageSessions} />
     </div>
   );
 }
