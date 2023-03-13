@@ -9,6 +9,7 @@ import { UserSessionDatasInterface } from './models/UserSessionDatasInterface';
 import { UserPerformanceDatasInterface } from './models/UserPerformanceDatasInterface';
 import Session from './components/Session';
 import Performance from './components/Performance';
+import TodayScore from './components/TodayScore';
 
 /**
  * Default App function
@@ -47,6 +48,7 @@ export default function App() {
       <div className='datas-container'>
         <Session data={userAverageSessions} />
         <Performance data={userPerformances} />
+        <TodayScore data={userMainDatas} />
       </div>
     </div>
   );

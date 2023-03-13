@@ -4,12 +4,6 @@ import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } fro
 export default function Perfomance(data: any) {
     const performances = data.data.data;
     const kinds = data.data.kind;
-    console.log(kinds)
-
-    const formatKind = (x: any) => {
-        console.log(x)
-        return x;
-    }
 
     return (
         <div id="performances">
