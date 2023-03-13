@@ -8,6 +8,7 @@ import { UserActivityDatasInterface } from './models/UserActivityDatasInterface'
 import { UserSessionDatasInterface } from './models/UserSessionDatasInterface';
 import { UserPerformanceDatasInterface } from './models/UserPerformanceDatasInterface';
 import Session from './components/Session';
+import Performance from './components/Performance';
 
 /**
  * Default App function
@@ -43,7 +44,10 @@ export default function App() {
   return (
     <div className="App">
       <Activity data={userActivities} />
-      <Session data={userAverageSessions} />
+      <div className='datas-container'>
+        <Session data={userAverageSessions} />
+        <Performance data={userPerformances} />
+      </div>
     </div>
   );
 }
