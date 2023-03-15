@@ -3,15 +3,30 @@ import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } fro
 
 export default function Perfomance(data: any) {
     const performances = data.data.data;
-    const kinds = data.data.kind;
+
+    const formatKind = (data: any) => {
+        switch (data.kind) {
+            case 1: return 'Intensité';
+            case 2: return 'Vitesse';
+            case 3: return 'Force';
+            case 4: return 'Endurance';
+            case 5: return 'Energie';
+            case 6: return 'Cardio';
+        }
+    }
 
     return (
         <div id="performances">
-            <ResponsiveContainer width="100%" height="100%" minHeight="200px">
-                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={performances}>
+            <ResponsiveContainer>
+                <RadarChart
+                    cx="50%"
+                    cy="50%"
+                    outerRadius="70%"
+                    data={performances}
+                >
                     <PolarGrid gridType="polygon" radialLines={false} />
-                    <PolarAngleAxis />
-                    <Radar name="Mike" dataKey="value" fill="#E60000" fillOpacity={0.7} />
+                    <PolarAngleAxis dataKey={(data) => formatKind(data)} />
+                    <Radar name="Mike" dataKey={"kind"} fill="#E60000" fillOpacity={0.7} />
                 </RadarChart>
             </ResponsiveContainer>
         </div>

@@ -1,9 +1,8 @@
-import { Legend, RadialBar, RadialBarChart, ResponsiveContainer } from 'recharts';
+import { RadialBar, RadialBarChart, ResponsiveContainer } from 'recharts';
 import '../styles/components/todayscore.scss';
 
 export default function TodayScore(data: any) {
     const score = [{ value: 1 - data.data.todayScore }];
-    console.log(data)
     const targetAngle = 90 + data.data.todayScore * 360
 
     return (
@@ -13,12 +12,10 @@ export default function TodayScore(data: any) {
                 <p className='percent'>{Number(data.data.todayScore) * 100}%</p>
                 <p>de votre objectif</p>
             </span>
-            <ResponsiveContainer width="100%" height="100%" minHeight="200px">
+            <ResponsiveContainer>
                 <RadialBarChart
-                    width={730}
-                    height={200}
-                    innerRadius="70%"
-                    outerRadius="80%"
+                    innerRadius="65%"
+                    outerRadius="75%"
                     data={score}
                     startAngle={90}
                     endAngle={targetAngle}
