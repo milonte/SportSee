@@ -12,6 +12,7 @@ export default function TodayScore(data: any) {
                 <p className='percent'>{Number(data.data.todayScore) * 100}%</p>
                 <p>de votre objectif</p>
             </span>
+            <div className='r'></div>
             <ResponsiveContainer>
                 <RadialBarChart
                     innerRadius="65%"

@@ -4,20 +4,72 @@ body {
     background-color: white;
     font-family: config.$font-family;
 
-    .datas-container {
+
+    .main {
         display: flex;
         flex-direction: row;
-        gap: 2%;
         flex-wrap: nowrap;
+        height: 100%;
+        max-width: 1280px;
+        margin: auto;
+        min-height: 750px;
+        @include config.screen-max(config.$desktop-max-width) {
+            flex-direction: column;
+        }
+
+
+        .container,
+        .aside {
+            margin: 2%;
+            @include config.screen-max(config.$desktop-max-width) {
+               margin: 0;
+            }
+            
+        }
         
-        #sessions,
-        #performances,
-        #today-score {
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
-            border-radius: 5px;
-            flex: 1 1 auto;
-            min-width: 250px;
-            min-height: 250px;
+        .container {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            flex: 80%;
+
+            @include config.screen-max(config.$desktop-max-width) {
+                flex: 100%;
+            }
+    
+            .datas-container {
+                display: flex;
+                flex-direction: row;
+                gap: 2%;
+                flex-wrap: nowrap;
+                
+                #sessions,
+                #performances,
+                #today-score,
+                .data-card {
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
+                    border-radius: 5px;
+                    flex: 1 1 auto;
+                    min-width: 250px;
+                    min-height: 250px;
+                }
+            }
+    
+        }
+        .aside {
+            flex: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+            @include config.screen-max(config.$desktop-max-width) {
+                flex: 100%;
+                flex-direction: row;
+            }
+            
         }
     }
+
 }

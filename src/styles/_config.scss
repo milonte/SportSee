@@ -1,12 +1,12 @@
 $primary-color: #E60000;
-$secondary-color: #F6F6F6;
+$secondary-color: #FBFBFB;
 
-$desktop-min-width: 1024px;
+$desktop-max-width: 1360px;
 
 $font-family: "Roboto", "Helvetica Neue", "Helvetica, Arial";
 
-@mixin screen-min($min) {
-    @media screen and (min-width: $min) {
+@mixin screen-max($max) {
+    @media screen and (max-width: $max) {
         @content
     }
 }

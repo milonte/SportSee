@@ -4,6 +4,18 @@
 #today-score {
     position: relative;
     background: config.$secondary-color;
+
+    .r {
+        position: absolute;
+        background: white;
+        width: 145px;
+        height: 145px;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+    }
     .title {
         position: absolute;
         top: 20px;
@@ -20,10 +32,10 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        /* padding-top: 20px; */
     }
     
     .legend {
+        z-index: 9;
         text-align: center;
         font-size: 14px;
         margin: 0;
