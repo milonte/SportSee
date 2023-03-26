@@ -2,48 +2,63 @@
 
 body {
     background-color: white;
-    font-family: config.$font-family;
+    font-family: config.$font-medium;
 
 
     .main {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: nowrap;
         height: 100%;
         max-width: 1280px;
         margin: auto;
+        padding: 2%;
         min-height: 750px;
+
         @include config.screen-max(config.$desktop-max-width) {
+            padding: 0;
             flex-direction: column;
         }
 
+        .welcome {
+            font-weight: 500;
+            font-size: 48px;
+            line-height: 24px;
 
-        .container,
-        .aside {
-            margin: 2%;
-            @include config.screen-max(config.$desktop-max-width) {
-               margin: 0;
+            .user {
+                color: #FF0101;
             }
-            
         }
-        
+
+        .status {
+            font-family: config.$font-light;
+            font-weight: 400;
+        }
+
+        .welcome,
+        .status {
+            @include config.screen-max(config.$desktop-max-width) {
+                margin-left: 20px;
+            }
+        }
+
         .container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             flex-wrap: nowrap;
             justify-content: space-around;
-            flex: 80%;
 
             @include config.screen-max(config.$desktop-max-width) {
+                flex-direction: column;
                 flex: 100%;
             }
-    
+
             .datas-container {
                 display: flex;
                 flex-direction: row;
                 gap: 2%;
                 flex-wrap: nowrap;
-                
+
                 #sessions,
                 #performances,
                 #today-score,
@@ -55,8 +70,13 @@ body {
                     min-height: 250px;
                 }
             }
-    
+
         }
+
+        .article {
+            flex: 80%;
+        }
+
         .aside {
             flex: 20%;
             display: flex;
@@ -68,7 +88,7 @@ body {
                 flex: 100%;
                 flex-direction: row;
             }
-            
+
         }
     }
 

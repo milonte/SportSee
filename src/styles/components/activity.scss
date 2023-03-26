@@ -3,6 +3,7 @@
 
 #activity {
     position: relative;
+
     .title {
         position: absolute;
         top: 30px;
@@ -10,13 +11,26 @@
         font-size: 15px;
         font-weight: 500;
     }
+
     .recharts-responsive-container {
         background-color: config.$secondary-color;
-    
+
         .recharts-default-legend {
             margin-bottom: 40px !important;
+
+            .recharts-legend-item {
+                margin-right: 40px !important;
+
+                .recharts-legend-item-text {
+                    color: #74798C !important;
+                    margin-left: 15px;
+                }
+            }
         }
-        
+
+
+
+
         .activity-tooltip {
             background-color: config.$primary-color;
             border: 0;

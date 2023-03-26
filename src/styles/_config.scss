@@ -3,7 +3,24 @@ $secondary-color: #FBFBFB;
 
 $desktop-max-width: 1360px;
 
-$font-family: "Roboto", "Helvetica Neue", "Helvetica, Arial";
+@font-face {
+    font-family: 'Roboto-light';
+    src: url('./fonts/Roboto-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto-medium';
+    src: url('./fonts/Roboto-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto-bold';
+    src: url('./fonts/Roboto-Bold.ttf');
+}
+
+$font-light: "Roboto-light";
+$font-medium: "Roboto-medium";
+$font-bold: "Roboto-bold";
 
 @mixin screen-max($max) {
     @media screen and (max-width: $max) {
