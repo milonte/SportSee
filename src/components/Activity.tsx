@@ -21,8 +21,8 @@ export default function Activity(data: any) {
 
         <div id='activity'>
             <h2 className='title'>Activité quotidienne</h2>
-            <ResponsiveContainer width="100%" height="100%" minHeight="400px">
-
+            {/* Need to set width to 99% to prevent resize bug */}
+            <ResponsiveContainer width="99%" height="100%" minHeight="400px">
                 <BarChart
                     width={500}
                     height={300}
