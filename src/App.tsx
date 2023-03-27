@@ -12,6 +12,7 @@ import Performance from './components/Performance';
 import TodayScore from './components/TodayScore';
 import DataCard from './components/DataCard';
 import TopBar from './components/TopBar';
+import LeftBar from './components/LeftBar';
 
 /**
  * Default App function
@@ -52,6 +53,7 @@ export default function App() {
   return (
     <>
       <TopBar />
+      <LeftBar />
       <div className="main">
         <h1 className="welcome">
           Bonjour <span className='user'>{userMainDatas?.userInfos?.firstName}</span>

@@ -4,16 +4,17 @@
     display: flex;
     flex-wrap: nowrap;
     position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #020203;
 }
 
 .topbar {
+    z-index: 99;
     width: 100%;
     height: 90px;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #020203;
-    top: 0;
-    left: 0;
     align-items: center;
     font-size: 24px;
     font-family: config.$font-bold;
@@ -47,5 +48,67 @@
         &:hover {
             color: #E60000;
         }
+    }
+}
+
+.leftbar {
+    z-index: 90;
+    width: 120px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .pills {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 100px;
+
+        .leftpill {
+            width: 64px;
+            height: 64px;
+            background-color: #fff;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .yoga {
+            width: 36px;
+            height: 32px;
+            background: url('../../../public/icons/yoga.svg') no-repeat center center;
+        }
+
+        .wave {
+            width: 27px;
+            height: 24px;
+            background: url('../../../public/icons/wave.svg') no-repeat center center;
+        }
+
+        .bike {
+            width: 37px;
+            height: 32px;
+            background: url('../../../public/icons/bike.svg') no-repeat center center;
+        }
+
+        .alt {
+            width: 32px;
+            height: 32px;
+            background: url('../../../public/icons/alt.svg') no-repeat center center;
+        }
+    }
+
+    .copyright {
+        font-size: 12px;
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
+        margin-bottom: 50px;
+        color: white;
     }
 }
