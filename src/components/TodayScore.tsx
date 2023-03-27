@@ -1,6 +1,7 @@
 import { RadialBar, RadialBarChart, ResponsiveContainer } from 'recharts';
 import '../styles/components/todayscore.scss';
 import { useEffect, useState } from 'react';
+import Loader from './Loader';
 
 export default function TodayScore(data: any) {
     const [isLoading, setIsLoading] = useState(true)
@@ -8,7 +9,6 @@ export default function TodayScore(data: any) {
     const [targetAngle, setTargetAngle] = useState(0)
 
     useEffect(() => {
-        console.log(data.data.todayScore)
         if (data.data.todayScore !== undefined) {
             setScore([{ value: 1 - data.data.todayScore }]);
             setTargetAngle(90 + data.data.todayScore * 360);
@@ -21,7 +21,7 @@ export default function TodayScore(data: any) {
     return (
         <div id="today-score">
             {isLoading ? (
-                <>Loading</>
+                <Loader />
             ) : (
                 <>
                     <h2 className="title">Score</h2>
