@@ -1,8 +1,19 @@
+import { useEffect, useState } from 'react';
 import '../styles/components/performance.scss';
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } from "recharts";
+import Loader from './Loader';
 
 export default function Perfomance(data: any) {
-    const performances = data.data.data;
+    const [isLoading, setIsLoading] = useState(true)
+    const [performances, setPerformances] = useState([]);
+
+    useEffect(() => {
+        if (data.data.data !== undefined) {
+            setPerformances(data.data.data);
+            setIsLoading(false);
+        }
+
+    }, [data.data.data]);
 
     const formatKind = (data: any) => {
         switch (data.kind) {
@@ -17,18 +28,22 @@ export default function Perfomance(data: any) {
 
     return (
         <div id="performances">
-            <ResponsiveContainer>
-                <RadarChart
-                    cx="50%"
-                    cy="50%"
-                    outerRadius="70%"
-                    data={performances}
-                >
-                    <PolarGrid gridType="polygon" radialLines={false} />
-                    <PolarAngleAxis dataKey={(data) => formatKind(data)} />
-                    <Radar name="Mike" dataKey={"kind"} fill="#E60000" fillOpacity={0.7} />
-                </RadarChart>
-            </ResponsiveContainer>
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <ResponsiveContainer>
+                    <RadarChart
+                        cx="50%"
+                        cy="50%"
+                        outerRadius="70%"
+                        data={performances}
+                    >
+                        <PolarGrid gridType="polygon" radialLines={false} />
+                        <PolarAngleAxis dataKey={(data) => formatKind(data)} />
+                        <Radar name="Mike" dataKey={"kind"} fill="#E60000" fillOpacity={0.7} />
+                    </RadarChart>
+                </ResponsiveContainer>
+            )}
         </div>
     );
 }
