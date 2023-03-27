@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import '../styles/components/datacard.scss';
+import Loader from './Loader';
 
 export default function DataCard(props: any) {
-
+    const [isLoading, setIsLoading] = useState(true)
     const [dataKey, setDataKey] = useState('');
     const [dataValue, setDataValue] = useState('');
 
@@ -35,6 +36,7 @@ export default function DataCard(props: any) {
             }
             setDataValue(props.data[1] + unit)
             setDataKey(category);
+            setIsLoading(false);
         }
     }, [props])
 
@@ -43,8 +45,13 @@ export default function DataCard(props: any) {
         <div className="data-card">
             <div className={`icon ${dataKey.toLowerCase()}`}></div>
             <div className="infos">
-                <div className='value'>{dataValue}</div>
-                <div className='category'>{dataKey}</div>
+                {isLoading ? (
+                    <Loader />
+                ) : (<>
+                    <div className='value'>{dataValue}</div>
+                    <div className='category'>{dataKey}</div>
+                </>
+                )}
             </div>
         </div>
     )
