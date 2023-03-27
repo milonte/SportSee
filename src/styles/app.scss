@@ -14,9 +14,11 @@ body {
         margin: auto;
         padding: 2%;
         min-height: 750px;
+        /* for topbar & leftbar */
+        padding-top: 100px;
+        padding-left: 150px;
 
         @include config.screen-max(config.$desktop-max-width) {
-            padding: 0;
             flex-direction: column;
         }
 
