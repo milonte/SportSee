@@ -14,6 +14,9 @@ body {
         margin: auto;
         padding: 2%;
         min-height: 750px;
+        /* for topbar & leftbar */
+        margin-top: 90px;
+        margin-left: 90px;
 
         @include config.screen-max(config.$desktop-max-width) {
             padding: 0;
