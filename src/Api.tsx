@@ -38,6 +38,7 @@ async function fetchData<T>(query: string): Promise<T> {
     } else {
         return await fetch(process.env.REACT_APP_API_URL + query)
             .then((resp) => { return resp.json() })
+            .then((json) => { return json.data })
             .catch(error => error.status)
     }
 }

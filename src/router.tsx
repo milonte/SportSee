@@ -1,13 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import { getUserMainDatas } from "./Api";
 import App from "./App";
+import Error from "./Error";
 
+console.log(process.env)
 
 const router = createBrowserRouter([
     {
         path: "/:userId",
         element: <App />,
-        //errorElement: <ErrorPage />,
+        errorElement: <Error />,
         loader: ({ params }) => {
             const data = params.userId ? getUserMainDatas(params.userId) : null
 

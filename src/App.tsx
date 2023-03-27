@@ -13,6 +13,7 @@ import TodayScore from './components/TodayScore';
 import DataCard from './components/DataCard';
 import TopBar from './components/TopBar';
 import LeftBar from './components/LeftBar';
+import Loader from './components/Loader';
 
 /**
  * Default App function
@@ -44,10 +45,7 @@ export default function App() {
     }
     fetchData();
   }, [
-    userMainDatas,
-    userActivities,
-    userAverageSessions,
-    userPerformances
+
   ])
 
   return (
@@ -56,7 +54,7 @@ export default function App() {
       <LeftBar />
       <div className="main">
         <h1 className="welcome">
-          Bonjour <span className='user'>{userMainDatas?.userInfos?.firstName}</span>
+          Bonjour <span className='user'>{userMainDatas?.userInfos?.firstName || 'Utilisateur'}</span>
         </h1>
         <p className='status'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
         <div className="container">
@@ -71,7 +69,7 @@ export default function App() {
           <div className='aside'>
             {userMainDatas.keyData ? Object.entries(userMainDatas.keyData).map((value: any) => {
               return <DataCard data={value} key={value[0]} />
-            }) : null}
+            }) : <Loader />}
 
           </div>
         </div>
