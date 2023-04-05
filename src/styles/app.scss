@@ -17,6 +17,7 @@ body {
         /* for topbar & leftbar */
         padding-top: 100px;
         padding-left: 150px;
+        padding-right: 50px;
 
         @include config.screen-max(config.$desktop-max-width) {
             flex-direction: column;
@@ -49,6 +50,7 @@ body {
             flex-direction: row;
             flex-wrap: nowrap;
             justify-content: space-around;
+            gap: 50px;
 
             @include config.screen-max(config.$desktop-max-width) {
                 flex-direction: column;
@@ -60,6 +62,7 @@ body {
                 flex-direction: row;
                 gap: 2%;
                 flex-wrap: nowrap;
+                width: 99%;
 
                 #sessions,
                 #performances,
@@ -77,13 +80,17 @@ body {
 
         .article {
             flex: 80%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            gap: 20px;
         }
 
         .aside {
             flex: 20%;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
 
             @include config.screen-max(config.$desktop-max-width) {

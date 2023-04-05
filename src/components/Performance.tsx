@@ -1,22 +1,26 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import '../styles/components/performance.scss';
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } from "recharts";
 import Loader from './Loader';
+import { UserPerformanceDatasInterface } from '../models/UserPerformanceDatasInterface';
 
-export default function Perfomance(data: any) {
-    const [isLoading, setIsLoading] = useState(true)
-    const [performances, setPerformances] = useState([]);
+interface PerformancedataProps {
+    data: UserPerformanceDatasInterface;
+}
+
+export default function Perfomance({ data }: PerformancedataProps) {
+    const [isLoading, setIsLoading]: SetStateAction<any> = useState<boolean>(true)
+    const [performances, setPerformances]: SetStateAction<any> = useState<UserPerformanceDatasInterface>();
 
     useEffect(() => {
-        if (data.data.data !== undefined) {
-            setPerformances(data.data.data);
+        if (data.data !== undefined) {
+            setPerformances(data.data);
             setIsLoading(false);
         }
+    }, [data.data]);
 
-    }, [data.data.data]);
-
-    const formatKind = (data: any) => {
-        switch (data.kind) {
+    const formatKind = (kinds: { value: number, kind: number }) => {
+        switch (kinds.kind) {
             case 1: return 'Intensité';
             case 2: return 'Vitesse';
             case 3: return 'Force';
@@ -39,7 +43,7 @@ export default function Perfomance(data: any) {
                         data={performances}
                     >
                         <PolarGrid gridType="polygon" radialLines={false} />
-                        <PolarAngleAxis dataKey={(data) => formatKind(data)} />
+                        <PolarAngleAxis dataKey={(kinds) => formatKind(kinds)} />
                         <Radar name="Mike" dataKey={"kind"} fill="#E60000" fillOpacity={0.7} />
                     </RadarChart>
                 </ResponsiveContainer>

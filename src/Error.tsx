@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 export default function Error() {
     const error: any = useRouteError();
+    console.log(error)
     function displayError() {
-        console.error(error);
         return (
             <>
                 <div className='error-status'>{error.status}</div>

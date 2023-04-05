@@ -2,17 +2,24 @@ import { useEffect, useState } from 'react';
 import '../styles/components/datacard.scss';
 import Loader from './Loader';
 
-export default function DataCard(props: any) {
-    const [isLoading, setIsLoading] = useState(true)
-    const [dataKey, setDataKey] = useState('');
-    const [dataValue, setDataValue] = useState('');
+interface DataProps {
+    data: {
+        0: string;
+        1: number;
+    };
+}
+
+export default function DataCard({ data }: DataProps) {
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [dataKey, setDataKey] = useState<string>('');
+    const [dataValue, setDataValue] = useState<string>('');
 
     useEffect(() => {
-        if (props.data) {
+        if (data) {
             let category = '';
             let unit = '';
 
-            switch (props.data[0]) {
+            switch (data[0]) {
                 case 'calorieCount':
                     unit = 'kCal';
                     category = 'Calories';
@@ -34,12 +41,11 @@ export default function DataCard(props: any) {
                     category = 'Category';
                     break;
             }
-            setDataValue(props.data[1] + unit)
+            setDataValue(data[1] + unit)
             setDataKey(category);
             setIsLoading(false);
         }
-    }, [props])
-
+    }, [data])
 
     return (
         <div className="data-card">

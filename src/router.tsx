@@ -3,18 +3,21 @@ import { getUserMainDatas } from "./Api";
 import App from "./App";
 import Error from "./Error";
 
-console.log(process.env)
-
 const router = createBrowserRouter([
     {
         path: "/:userId",
         element: <App />,
         errorElement: <Error />,
         loader: ({ params }) => {
+            if (!params.userId) {
+
+                throw new Response("Bad Request", { status: 404 })
+            }
             const data = params.userId ? getUserMainDatas(params.userId) : null
 
-            if (!data) {
-                throw new Response("", { status: 404 })
+            if (null === data) {
+                console.log('error')
+                throw new Response("Bad Request", { status: 404 })
             }
             return data;
 

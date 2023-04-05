@@ -1,21 +1,27 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, SetStateAction, useEffect, useState } from 'react';
 import '../styles/components/activity.scss';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Text, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, TooltipProps } from 'recharts';
 import Loader from './Loader';
+import { UserActivityDatasInterface } from '../models/UserActivityDatasInterface';
+import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
-export default function Activity(data: any) {
-    const [isLoading, setIsLoading] = useState(true)
-    const [activities, setActivities] = useState([]);
+interface ActivityProps {
+    data: UserActivityDatasInterface;
+}
+
+export default function Activity({ data }: ActivityProps) {
+    const [isLoading, setIsLoading]: SetStateAction<any> = useState<boolean>(true)
+    const [activities, setActivities]: SetStateAction<any> = useState<UserActivityDatasInterface>();
 
     useEffect(() => {
-        if (data.data.sessions !== undefined) {
-            setActivities(data.data.sessions);
+        if (data.sessions !== undefined) {
+            setActivities(data.sessions);
             setIsLoading(false);
         }
 
-    }, [data.data.sessions]);
+    }, [data.sessions]);
 
-    const ActivityTooptip = ({ active, payload }: any) => {
+    const ActivityTooptip = ({ active, payload }: TooltipProps<ValueType, NameType>): ReactElement | null => {
         if (active && payload && payload.length) {
             return (
                 <div className="activity-tooltip">

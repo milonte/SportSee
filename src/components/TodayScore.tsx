@@ -1,22 +1,24 @@
 import { RadialBar, RadialBarChart, ResponsiveContainer } from 'recharts';
 import '../styles/components/todayscore.scss';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import Loader from './Loader';
 
-export default function TodayScore(data: any) {
-    const [isLoading, setIsLoading] = useState(true)
-    const [score, setScore] = useState([{ value: 0 }]);
-    const [targetAngle, setTargetAngle] = useState(0)
+interface TodayScoreProps {
+    data: any;
+}
+export default function TodayScore({ data }: TodayScoreProps) {
+    const [isLoading, setIsLoading]: SetStateAction<any> = useState<boolean>(true)
+    const [score, setScore]: SetStateAction<any> = useState<any[]>([{ value: 0 }]);
+    const [targetAngle, setTargetAngle]: SetStateAction<any> = useState<number>(0)
 
     useEffect(() => {
-        if (data.data.todayScore !== undefined) {
-            setScore([{ value: 1 - data.data.todayScore }]);
-            setTargetAngle(90 + data.data.todayScore * 360);
+        if (data.todayScore !== undefined) {
+            setScore([{ value: 1 - data.todayScore }]);
+            setTargetAngle(90 + data.todayScore * 360);
             setIsLoading(false);
         }
 
-    }, [data.data.todayScore]);
-
+    }, [data.todayScore]);
 
     return (
         <div id="today-score">
@@ -26,7 +28,7 @@ export default function TodayScore(data: any) {
                 <>
                     <h2 className="title">Score</h2>
                     <span className='legend'>
-                        <p className='percent'>{Number(data.data.todayScore) * 100}%</p>
+                        <p className='percent'>{Number(data.todayScore) * 100}%</p>
                         <p>de votre objectif</p>
                     </span>
                     <div className='r'></div>

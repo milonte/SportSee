@@ -20,10 +20,10 @@ import Loader from './components/Loader';
  */
 export default function App() {
 
-  const [userMainDatas, setUserMainDatas]: SetStateAction<any> = useState([])
-  const [userActivities, setUserActivities]: SetStateAction<any> = useState([])
-  const [userAverageSessions, setUserAverageSessions]: SetStateAction<any> = useState([])
-  const [userPerformances, setUserPerformances]: SetStateAction<any> = useState([])
+  const [userMainDatas, setUserMainDatas]: SetStateAction<any> = useState<UserMainDatasInterface[]>([])
+  const [userActivities, setUserActivities]: SetStateAction<any> = useState<UserActivityDatasInterface[]>([])
+  const [userAverageSessions, setUserAverageSessions]: SetStateAction<any> = useState<UserSessionDatasInterface[]>([])
+  const [userPerformances, setUserPerformances]: SetStateAction<any> = useState<UserPerformanceDatasInterface[]>([])
   const { userId } = useParams();
 
   useEffect(() => {
@@ -44,9 +44,7 @@ export default function App() {
 
     }
     fetchData();
-  }, [
-
-  ])
+  }, [])
 
   return (
     <>
@@ -67,9 +65,10 @@ export default function App() {
             </div>
           </div>
           <div className='aside'>
-            {userMainDatas.keyData ? Object.entries(userMainDatas.keyData).map((value: any) => {
-              return <DataCard data={value} key={value[0]} />
-            }) : <Loader />}
+            {userMainDatas.keyData ? Object.entries(userMainDatas.keyData).map(
+              (value: { 0: string, 1: any, }) => {
+                return <DataCard data={value} key={value[0]} />
+              }) : <Loader />}
 
           </div>
         </div>

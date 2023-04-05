@@ -1,22 +1,27 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, SetStateAction, useEffect, useState } from 'react';
 import '../styles/components/session.scss';
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import Loader from './Loader';
+import { SessionInterface, UserSessionDatasInterface } from '../models/UserSessionDatasInterface';
 
-export default function Session(data: any) {
-    const [isLoading, setIsLoading] = useState(true)
-    const [sessions, setSessions] = useState([]);
+interface SessionsdataProps {
+    data: UserSessionDatasInterface
+}
+
+export default function Session({ data }: SessionsdataProps) {
+    const [isLoading, setIsLoading]: SetStateAction<any> = useState<boolean>(true)
+    const [sessions, setSessions]: SetStateAction<any> = useState<UserSessionDatasInterface>();
 
     useEffect(() => {
-        if (data.data.sessions !== undefined) {
-            setSessions(data.data.sessions)
+        if (data.sessions !== undefined) {
+            setSessions(data.sessions);
             setIsLoading(false);
         }
 
-    }, [data.data.sessions]);
+    }, [data.sessions]);
 
-    const formatDay = (data: any) => {
-        switch (data.day) {
+    const formatDay = (day: SessionInterface) => {
+        switch (day.day) {
             case 1: return 'L';
             case 2: return 'M';
             case 3: return 'M';
@@ -44,9 +49,9 @@ export default function Session(data: any) {
                                 bottom: 20,
                             }}
                         >
-                            <XAxis dataKey={(data) => formatDay(data)} axisLine={false} tickLine={false} tick={{ fill: 'white' }} />
+                            <XAxis dataKey={(day) => formatDay(day)} axisLine={false} tickLine={false} tick={{ fill: 'white' }} />
                             <YAxis dataKey="sessionLength" hide allowDataOverflow={true} />
-                            <Tooltip content={({ active, payload }): any => {
+                            <Tooltip content={({ active, payload }): ReactElement | null => {
                                 if (active && payload && payload.length) {
                                     return (
                                         <div className="session-tooltip">
