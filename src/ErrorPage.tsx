@@ -1,10 +1,11 @@
 import './styles/error.scss';
 import { useRouteError } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import TopBar from './components/TopBar';
+import LeftBar from './components/LeftBar';
 
-export default function Error() {
+export default function ErrorPage() {
     const error: any = useRouteError();
-    console.log(error)
     function displayError() {
         return (
             <>
@@ -18,9 +19,13 @@ export default function Error() {
     }
     return (
         <>
-            <div id="error">
-                <div>{displayError()}</div>
-                <Link to={"/"} className='home-link'>Retourner sur la page d’accueil</Link>
+            <TopBar />
+            <LeftBar />
+            <div className="main">
+                <div id="error">
+                    <div>{displayError()}</div>
+                    <Link to={"/"} className='home-link'>Retourner sur la page d’accueil</Link>
+                </div>
             </div>
         </>
     )

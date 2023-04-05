@@ -1,27 +1,40 @@
 import { createBrowserRouter } from "react-router-dom";
 import { getUserMainDatas } from "./Api";
 import App from "./App";
-import Error from "./Error";
+import ErrorPage from "./ErrorPage";
+import Dashboard from "./Dashboard";
+
+const NewErrorResponse = (message: string) => new Response(message, { status: 404 })
 
 const router = createBrowserRouter([
     {
-        path: "/:userId",
+        path: "/",
         element: <App />,
-        errorElement: <Error />,
+        errorElement: <ErrorPage />,
         loader: ({ params }) => {
-            if (!params.userId) {
-
-                throw new Response("Bad Request", { status: 404 })
+            if (undefined === params.userId) {
+                throw NewErrorResponse("Bad Request: No Route")
+            } else {
+                return true // if an User param is defined, continue
             }
-            const data = params.userId ? getUserMainDatas(params.userId) : null
-
-            if (null === data) {
-                console.log('error')
-                throw new Response("Bad Request", { status: 404 })
+        },
+        children: [{
+            index: true,
+            path: "/:userId",
+            element: <Dashboard />,
+            loader: async ({ params }) => {
+                if (params.userId) {
+                    const data = await Promise.resolve(getUserMainDatas(params.userId))
+                        .then((result) => { return result; });
+                    if (undefined === data) {
+                        throw NewErrorResponse("Bad Request: No User")
+                    }
+                    return data;
+                }
+                throw NewErrorResponse("Bad Request: No User")
             }
-            return data;
+        },]
 
-        }
     }
 ]);
 
