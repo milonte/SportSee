@@ -1,6 +1,6 @@
 export interface UserActivityDatasInterface {
     userId: number,
-    sessions: ActivityInterface
+    sessions: [ActivityInterface]
 }
 
 export interface ActivityInterface {

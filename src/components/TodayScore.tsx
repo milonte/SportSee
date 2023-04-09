@@ -1,24 +1,27 @@
 import { RadialBar, RadialBarChart, ResponsiveContainer } from 'recharts';
 import '../styles/components/todayscore.scss';
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Loader from './Loader';
 
 interface TodayScoreProps {
     data: any;
 }
+
+/**
+ * TodayScore Component
+ * @param data : Score data 
+ * @returns ReactElement : TodayScore Component
+ */
 export default function TodayScore({ data }: TodayScoreProps) {
-    const [isLoading, setIsLoading]: SetStateAction<any> = useState<boolean>(true)
-    const [score, setScore]: SetStateAction<any> = useState<any[]>([{ value: 0 }]);
-    const [targetAngle, setTargetAngle]: SetStateAction<any> = useState<number>(0)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [score, setScore] = useState<number>(0);
 
     useEffect(() => {
-        if (data.todayScore !== undefined) {
-            setScore([{ value: 1 - data.todayScore }]);
-            setTargetAngle(90 + data.todayScore * 360);
+        if (data.todayScore || data.score) {
+            setScore(data.todayScore ? data.todayScore : data.score);
             setIsLoading(false);
         }
-
-    }, [data.todayScore]);
+    }, [data]);
 
     return (
         <div id="today-score">
@@ -28,7 +31,7 @@ export default function TodayScore({ data }: TodayScoreProps) {
                 <>
                     <h2 className="title">Score</h2>
                     <span className='legend'>
-                        <p className='percent'>{Number(data.todayScore) * 100}%</p>
+                        <p className='percent'>{Number(score * 100)}%</p>
                         <p>de votre objectif</p>
                     </span>
                     <div className='r'></div>
@@ -36,9 +39,9 @@ export default function TodayScore({ data }: TodayScoreProps) {
                         <RadialBarChart
                             innerRadius="65%"
                             outerRadius="75%"
-                            data={score}
+                            data={[{ value: 1 - score }]}
                             startAngle={90}
-                            endAngle={targetAngle}
+                            endAngle={90 + score * 360}
                             barSize={20}
                         >
                             <RadialBar fill='#E60000' cornerRadius={20} background dataKey='value' />

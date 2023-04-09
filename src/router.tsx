@@ -4,7 +4,13 @@ import App from "./App";
 import ErrorPage from "./ErrorPage";
 import Dashboard from "./Dashboard";
 
-const NewErrorResponse = (message: string) => new Response(message, { status: 404 })
+/**
+ * Create a new Error Response
+ * @param message | error message
+ * @param code | error statusCode
+ * @returns Reponse
+ */
+const NewErrorResponse = (message: string, code: number): Response => new Response(message, { status: code, statusText: message })
 
 const router = createBrowserRouter([
     {
@@ -12,26 +18,29 @@ const router = createBrowserRouter([
         element: <App />,
         errorElement: <ErrorPage />,
         loader: ({ params }) => {
+            // If no user specified in params, return error
             if (undefined === params.userId) {
-                throw NewErrorResponse("Bad Request: No Route")
-            } else {
-                return true // if an User param is defined, continue
+                throw NewErrorResponse("Page non trouvée", 404)
             }
+            return true // if an User param is defined, continue
+
         },
         children: [{
             index: true,
             path: "/:userId",
             element: <Dashboard />,
             loader: async ({ params }) => {
-                if (params.userId) {
-                    const data = await Promise.resolve(getUserMainDatas(params.userId))
-                        .then((result) => { return result; });
-                    if (undefined === data) {
-                        throw NewErrorResponse("Bad Request: No User")
-                    }
-                    return data;
+                // Try to call API
+                const data = await Promise.resolve(getUserMainDatas(params.userId || ""))
+                    .then((result) => { return result; })
+                    // If error is detected, return error 500
+                    .catch(err => { throw NewErrorResponse("Une erreur est survenue. Veuillez reesayer ultérieurement", 500) })
+                // If no user found with the given UserId, return error 404
+                if (undefined === data) {
+                    throw NewErrorResponse("Aucun utilisateur trouvé", 404)
                 }
-                throw NewErrorResponse("Bad Request: No User")
+                // If the user is defined and is find, display Dashboard
+                return true;
             }
         },]
 

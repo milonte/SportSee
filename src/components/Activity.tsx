@@ -1,4 +1,4 @@
-import { ReactElement, SetStateAction, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import '../styles/components/activity.scss';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, TooltipProps } from 'recharts';
 import Loader from './Loader';
@@ -9,18 +9,26 @@ interface ActivityProps {
     data: UserActivityDatasInterface;
 }
 
-export default function Activity({ data }: ActivityProps) {
-    const [isLoading, setIsLoading]: SetStateAction<any> = useState<boolean>(true)
-    const [activities, setActivities]: SetStateAction<any> = useState<UserActivityDatasInterface>();
+/**
+ * Activity Component
+ * @param data : Activity Data
+ * @returns ReactElement : Activity Component
+ */
+export default function Activity({ data }: ActivityProps): ReactElement {
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     useEffect(() => {
         if (data.sessions !== undefined) {
-            setActivities(data.sessions);
             setIsLoading(false);
         }
 
     }, [data.sessions]);
 
+    /**
+     * Custom Activity Tooltip
+     * @param TooltipProps
+     * @returns ReactElement : Tooltip
+     */
     const ActivityTooptip = ({ active, payload }: TooltipProps<ValueType, NameType>): ReactElement | null => {
         if (active && payload && payload.length) {
             return (
@@ -35,7 +43,6 @@ export default function Activity({ data }: ActivityProps) {
     };
 
     return (
-
         <div id='activity'>
             {isLoading ? (
                 <Loader />
@@ -47,7 +54,7 @@ export default function Activity({ data }: ActivityProps) {
                         <BarChart
                             width={500}
                             height={300}
-                            data={activities}
+                            data={data.sessions}
                             margin={{
                                 top: 40,
                                 right: 20,

@@ -11,8 +11,8 @@ import { UserSessionDatasInterface } from "./models/UserSessionDatasInterface.js
 
 /**
  * Call API / mock datas function
- * @param query 
- * @returns 
+ * @param query : string
+ * @returns Promise
  */
 async function fetchData<T>(query: string): Promise<T> {
     const searchId = Number(query.split('/')[2])
@@ -37,37 +37,37 @@ async function fetchData<T>(query: string): Promise<T> {
 
     } else {
         return await fetch(process.env.REACT_APP_API_URL + query)
+            .catch(error => error.status)
             .then((resp) => { return resp.json() })
             .then((json) => { return json.data })
-            .catch(error => error.status)
     }
 }
 
 /**
  * Get User main datas from API
  * @param id :string
- * @returns 
+ * @returns User main datas: UserMainDatasInterface
  */
 const getUserMainDatas = async (id: string): Promise<UserMainDatasInterface> => { return await fetchData<UserMainDatasInterface>('/user/' + id) }
 
 /**
  * Get User Activities datas from API
- * @param id :sting
- * @returns 
+ * @param id :string
+ * @returns User Activities data : UserActivityDatasInterface
  */
 const getUserActivities = async (id: string): Promise<UserActivityDatasInterface> => { return await fetchData<UserActivityDatasInterface>('/user/' + id + '/activity') }
 
 /**
  * Get User average Sessions datas from API
- * @param id 
- * @returns 
+ * @param id : string
+ * @returns User Sessions data : UserSessionDatasInterface
  */
 const getUserAverageSessions = async (id: string): Promise<UserSessionDatasInterface> => { return await fetchData<UserSessionDatasInterface>('/user/' + id + '/average-sessions') }
 
 /**
  * Get User Performances datas from API
  * @param id :string
- * @returns 
+ * @returns User Perdormances data : UserPerformanceDatasInterface
  */
 const getUserPerformances = async (id: string): Promise<UserPerformanceDatasInterface> => { return await fetchData<UserPerformanceDatasInterface>('/user/' + id + '/performance') }
 

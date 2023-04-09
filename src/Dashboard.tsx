@@ -1,5 +1,5 @@
 import './styles/dashboard.scss';
-import { ReactElement, SetStateAction, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { UserMainDatasInterface } from "./models/UserMainDatasInterface";
 import { UserActivityDatasInterface } from "./models/UserActivityDatasInterface";
 import { UserSessionDatasInterface } from "./models/UserSessionDatasInterface";
@@ -13,16 +13,23 @@ import TodayScore from "./components/TodayScore";
 import DataCard from "./components/DataCard";
 import Loader from "./components/Loader";
 
+/**
+ * Dashboard Component
+ * @returns Dashboard : ReactElement
+ */
 export default function Dashboard(): ReactElement {
-    const [userMainDatas, setUserMainDatas]: SetStateAction<any> = useState<UserMainDatasInterface[]>([])
-    const [userActivities, setUserActivities]: SetStateAction<any> = useState<UserActivityDatasInterface[]>([])
-    const [userAverageSessions, setUserAverageSessions]: SetStateAction<any> = useState<UserSessionDatasInterface[]>([])
-    const [userPerformances, setUserPerformances]: SetStateAction<any> = useState<UserPerformanceDatasInterface[]>([])
+    const [userMainDatas, setUserMainDatas] = useState<UserMainDatasInterface>()
+    const [userActivities, setUserActivities] = useState<UserActivityDatasInterface>()
+    const [userAverageSessions, setUserAverageSessions] = useState<UserSessionDatasInterface>()
+    const [userPerformances, setUserPerformances] = useState<UserPerformanceDatasInterface>()
     const { userId } = useParams();
 
     useEffect(() => {
+
+        /**
+         * Get User all datas from API / mocks
+         */
         async function fetchData() {
-            // get datas from API / mocks
             if (userId) {
                 const datasResponse: UserMainDatasInterface = await getUserMainDatas(userId);
                 const activitiesResponse: UserActivityDatasInterface = await getUserActivities(userId);
@@ -48,15 +55,15 @@ export default function Dashboard(): ReactElement {
             <p className='status'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
             <div className="container">
                 <div className="article">
-                    <Activity data={userActivities} />
+                    {userActivities ? <Activity data={userActivities} /> : null}
                     <div className='datas-container'>
-                        <Session data={userAverageSessions} />
-                        <Performance data={userPerformances} />
-                        <TodayScore data={userMainDatas} />
+                        {userAverageSessions ? <Session data={userAverageSessions} /> : null}
+                        {userPerformances ? <Performance data={userPerformances} /> : null}
+                        {userMainDatas ? <TodayScore data={userMainDatas} /> : null}
                     </div>
                 </div>
                 <div className='aside'>
-                    {userMainDatas.keyData ? Object.entries(userMainDatas.keyData).map(
+                    {userMainDatas && userMainDatas.keyData ? Object.entries(userMainDatas.keyData).map(
                         (value: { 0: string, 1: any, }) => {
                             return <DataCard data={value} key={value[0]} />
                         }) : <Loader />}

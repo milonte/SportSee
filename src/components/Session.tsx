@@ -1,4 +1,4 @@
-import { ReactElement, SetStateAction, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import '../styles/components/session.scss';
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import Loader from './Loader';
@@ -8,18 +8,26 @@ interface SessionsdataProps {
     data: UserSessionDatasInterface
 }
 
+/**
+ * Sessions Component
+ * @param data : Sessions data 
+ * @returns ReactElement: Sessions Component
+ */
 export default function Session({ data }: SessionsdataProps) {
-    const [isLoading, setIsLoading]: SetStateAction<any> = useState<boolean>(true)
-    const [sessions, setSessions]: SetStateAction<any> = useState<UserSessionDatasInterface>();
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     useEffect(() => {
         if (data.sessions !== undefined) {
-            setSessions(data.sessions);
             setIsLoading(false);
         }
 
     }, [data.sessions]);
 
+    /**
+     * Day formater
+     * @param day : SessionInterface
+     * @returns string
+     */
     const formatDay = (day: SessionInterface) => {
         switch (day.day) {
             case 1: return 'L';
@@ -41,7 +49,7 @@ export default function Session({ data }: SessionsdataProps) {
                     <h2 className='title'>Durée moyenne des sessions</h2>
                     <ResponsiveContainer>
                         <LineChart
-                            data={sessions}
+                            data={data.sessions}
                             margin={{
                                 top: 120,
                                 right: 20,

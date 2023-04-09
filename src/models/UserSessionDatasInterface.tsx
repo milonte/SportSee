@@ -1,6 +1,6 @@
 export interface UserSessionDatasInterface {
     userId: number,
-    sessions: SessionInterface
+    sessions: [SessionInterface]
 }
 
 export interface SessionInterface {

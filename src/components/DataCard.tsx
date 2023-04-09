@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import '../styles/components/datacard.scss';
 import Loader from './Loader';
 
@@ -9,7 +9,12 @@ interface DataProps {
     };
 }
 
-export default function DataCard({ data }: DataProps) {
+/**
+ * Card of Calory | Proteins | Hydradators | Lipids
+ * @param data 
+ * @returns ReactElement
+ */
+export default function DataCard({ data }: DataProps): ReactElement {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [dataKey, setDataKey] = useState<string>('');
     const [dataValue, setDataValue] = useState<string>('');

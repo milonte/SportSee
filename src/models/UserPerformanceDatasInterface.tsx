@@ -8,8 +8,10 @@ export interface UserPerformanceDatasInterface {
         5: string,
         6: string
     },
-    data: {
-        value: number,
-        kind: number
-    },
+    data: [
+        {
+            value: number,
+            kind: number
+        }
+    ],
 }
