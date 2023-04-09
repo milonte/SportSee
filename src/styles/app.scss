@@ -12,8 +12,9 @@ body {
         height: 100%;
         max-width: 1280px;
         margin: auto;
-        padding: 2%;
-        min-height: 750px;
+        padding: 20px;
+        /* windows height - topBar - padding */
+        min-height: calc(99vh - 90px - 40px);
         /* for topbar & leftbar */
         padding-top: 100px;
         padding-left: 150px;

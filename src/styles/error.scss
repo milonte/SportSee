@@ -1,1 +1,34 @@
 @use '_config.scss';
+
+#error {
+    color: config.$primary-color;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-bottom: 0px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-family: config.$font-medium;
+
+    .error-status {
+        font-size: 288px;
+        font-weight: bold;
+    }
+
+    .error-message {
+        font-family: config.$font-light;
+        font-size: 36px;
+    }
+
+    .home-link {
+        font-size: 25px;
+        margin-top: 30px;
+
+        &:visited {
+            color: config.$primary-color;
+        }
+    }
+}
