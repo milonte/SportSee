@@ -1,6 +1,28 @@
 @use './_config.scss';
-@import-normalize;
 
 body {
     background-color: white;
+    font-family: config.$font-medium;
+
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        height: 100%;
+        max-width: 1280px;
+        margin: auto;
+        padding: 20px;
+        /* windows height - topBar - padding */
+        min-height: calc(99vh - 90px - 40px);
+        /* for topbar & leftbar */
+        padding-top: 100px;
+        padding-left: 150px;
+        padding-right: 50px;
+
+        @include config.screen-max(config.$desktop-max-width) {
+            flex-direction: column;
+        }
+    }
+
 }

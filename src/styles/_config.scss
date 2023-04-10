@@ -1,10 +1,29 @@
-$primary-color: #FF6060;
-$secondary-color: #F6F6F6;
+$primary-color: #E60000;
+$secondary-color: #FBFBFB;
 
-$desktop-min-width: 1024px;
+$desktop-max-width: 1360px;
 
-@mixin screen-min($min) {
-    @media screen and (min-width: $min) {
+@font-face {
+    font-family: 'Roboto-light';
+    src: url('./fonts/Roboto-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto-medium';
+    src: url('./fonts/Roboto-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto-bold';
+    src: url('./fonts/Roboto-Bold.ttf');
+}
+
+$font-light: "Roboto-light";
+$font-medium: "Roboto-medium";
+$font-bold: "Roboto-bold";
+
+@mixin screen-max($max) {
+    @media screen and (max-width: $max) {
         @content
     }
 }

@@ -1,0 +1,49 @@
+@use '../_config.scss';
+
+
+#activity {
+    position: relative;
+    height: 400px;
+
+    .title {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .recharts-responsive-container {
+        background-color: config.$secondary-color;
+
+        .recharts-default-legend {
+            margin-bottom: 40px !important;
+
+            .recharts-legend-item {
+                margin-right: 40px !important;
+
+                .recharts-legend-item-text {
+                    color: #74798C !important;
+                    margin-left: 15px;
+                }
+            }
+        }
+
+
+
+
+        .activity-tooltip {
+            background-color: config.$primary-color;
+            border: 0;
+            height: 100%;
+            text-align: center;
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            justify-content: space-around;
+            flex-direction: column;
+            display: flex;
+        }
+    }
+}

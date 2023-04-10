@@ -1,0 +1,68 @@
+@use '../_config.scss';
+
+.data-card {
+    background-color: config.$secondary-color;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: left;
+    padding: 20px 30px;
+    min-height: 100px;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+
+    @include config.screen-max(config.$desktop-max-width) {
+        margin: 20px 0;
+        min-height: 0;
+    }
+
+    .icon {
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        border-radius: 6px;
+
+        &.calories {
+            background: url('../../../public/icons/fire.svg') no-repeat center center;
+            background-color: rgba(#FF0000, $alpha: .1);
+        }
+
+        &.protéines {
+            background: url('../../../public/icons/meat.svg') no-repeat center center;
+            background-color: rgba(#4AB8FF, $alpha: .1);
+        }
+
+        &.glucides {
+            background: url('../../../public/icons/apple.svg') no-repeat center center;
+            background-color: rgba(#F9CE23, $alpha: .1);
+        }
+
+        &.lipides {
+            background: url('../../../public/icons/burger.svg') no-repeat center center;
+            background-color: rgba(#FD5181, $alpha: .1);
+        }
+    }
+
+    .infos {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        height: 60px;
+        justify-content: space-around;
+
+        .value {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+        }
+
+        .category {
+            font-size: 14px;
+            font-weight: 500;
+            color: #74798C;
+        }
+    }
+}
