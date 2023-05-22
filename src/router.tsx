@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         },
         children: [{
             index: true,
-            path: "/:userId",
+            path: "/user/:userId",
             element: <Dashboard />,
             loader: async ({ params }) => {
                 // Try to call API
