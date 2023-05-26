@@ -21,7 +21,6 @@ export default function Activity({ data }: ActivityProps): ReactElement {
         if (data.sessions !== undefined) {
             setIsLoading(false);
         }
-
     }, [data.sessions]);
 
     /**

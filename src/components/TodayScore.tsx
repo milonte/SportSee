@@ -2,9 +2,10 @@ import { RadialBar, RadialBarChart, ResponsiveContainer } from 'recharts';
 import '../styles/components/todayscore.scss';
 import { useEffect, useState } from 'react';
 import Loader from './Loader';
+import { FormatedMainDatasInterface } from '../models/UserMainDatasInterface';
 
 interface TodayScoreProps {
-    data: any;
+    data: FormatedMainDatasInterface;
 }
 
 /**
@@ -14,11 +15,9 @@ interface TodayScoreProps {
  */
 export default function TodayScore({ data }: TodayScoreProps) {
     const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [score, setScore] = useState<number>(0);
 
     useEffect(() => {
-        if (data.todayScore || data.score) {
-            setScore(data.todayScore ? data.todayScore : data.score);
+        if (data.todayScore) {
             setIsLoading(false);
         }
     }, [data]);
@@ -31,7 +30,7 @@ export default function TodayScore({ data }: TodayScoreProps) {
                 <>
                     <h2 className="title">Score</h2>
                     <span className='legend'>
-                        <p className='percent'>{Number(score * 100)}%</p>
+                        <p className='percent'>{(data.todayScore * 100)}%</p>
                         <p>de votre objectif</p>
                     </span>
                     <div className='r'></div>
@@ -39,9 +38,9 @@ export default function TodayScore({ data }: TodayScoreProps) {
                         <RadialBarChart
                             innerRadius="65%"
                             outerRadius="75%"
-                            data={[{ value: 1 - score }]}
+                            data={[{ value: 1 - data.todayScore }]}
                             startAngle={90}
-                            endAngle={90 + score * 360}
+                            endAngle={90 + data.todayScore * 360}
                             barSize={20}
                         >
                             <RadialBar fill='#E60000' cornerRadius={20} background dataKey='value' />

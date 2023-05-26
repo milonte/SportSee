@@ -5,7 +5,7 @@ import {
     USER_PERFORMANCE
 } from "./_mocks/data.js";
 import { UserActivityDatasInterface } from "./models/UserActivityDatasInterface.js";
-import { UserMainDatasInterface } from "./models/UserMainDatasInterface.js";
+import { UserMainDataInterface } from "./models/UserMainDatasInterface.js";
 import { UserPerformanceDatasInterface } from "./models/UserPerformanceDatasInterface.js";
 import { UserSessionDatasInterface } from "./models/UserSessionDatasInterface.js";
 
@@ -48,7 +48,7 @@ async function fetchData<T>(query: string): Promise<T> {
  * @param id :string
  * @returns User main datas: UserMainDatasInterface
  */
-const getUserMainDatas = async (id: string): Promise<UserMainDatasInterface> => { return await fetchData<UserMainDatasInterface>('/user/' + id) }
+const getUserMainDatas = async (id: string): Promise<UserMainDataInterface> => { return await fetchData<UserMainDataInterface>('/user/' + id) }
 
 /**
  * Get User Activities datas from API

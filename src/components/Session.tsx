@@ -2,10 +2,10 @@ import { ReactElement, useEffect, useState } from 'react';
 import '../styles/components/session.scss';
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import Loader from './Loader';
-import { SessionInterface, UserSessionDatasInterface } from '../models/UserSessionDatasInterface';
+import { FormatedSessionDatasInterface } from '../models/UserSessionDatasInterface';
 
 interface SessionsdataProps {
-    data: UserSessionDatasInterface
+    data: FormatedSessionDatasInterface
 }
 
 /**
@@ -22,23 +22,6 @@ export default function Session({ data }: SessionsdataProps) {
         }
 
     }, [data.sessions]);
-
-    /**
-     * Day formater
-     * @param day : SessionInterface
-     * @returns string
-     */
-    const formatDay = (day: SessionInterface) => {
-        switch (day.day) {
-            case 1: return 'L';
-            case 2: return 'M';
-            case 3: return 'M';
-            case 4: return 'J';
-            case 5: return 'V';
-            case 6: return 'S';
-            case 7: return 'D';
-        }
-    }
 
     return (
         <div id='sessions'>
@@ -57,7 +40,7 @@ export default function Session({ data }: SessionsdataProps) {
                                 bottom: 20,
                             }}
                         >
-                            <XAxis dataKey={(day) => formatDay(day)} axisLine={false} tickLine={false} tick={{ fill: 'white' }} />
+                            <XAxis dataKey={'day'} axisLine={false} tickLine={false} tick={{ fill: 'white' }} />
                             <YAxis dataKey="sessionLength" hide allowDataOverflow={true} />
                             <Tooltip content={({ active, payload }): ReactElement | null => {
                                 if (active && payload && payload.length) {

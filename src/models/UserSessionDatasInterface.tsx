@@ -1,9 +1,19 @@
 export interface UserSessionDatasInterface {
     userId: number,
-    sessions: [SessionInterface]
+    sessions: [
+        {
+            day: number,
+            sessionLength: number
+        }
+    ]
+}
+
+export interface FormatedSessionDatasInterface {
+    userId: number,
+    sessions: SessionInterface[]
 }
 
 export interface SessionInterface {
-    day: number,
+    day: string,
     sessionLength: number
 }

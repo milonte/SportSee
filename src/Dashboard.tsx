@@ -1,9 +1,9 @@
 import './styles/dashboard.scss';
 import { ReactElement, useEffect, useState } from "react";
-import { UserMainDatasInterface } from "./models/UserMainDatasInterface";
+import { FormatedMainDatasInterface, KeyDatasInterface, UserMainDataInterface } from "./models/UserMainDatasInterface";
 import { UserActivityDatasInterface } from "./models/UserActivityDatasInterface";
-import { UserSessionDatasInterface } from "./models/UserSessionDatasInterface";
-import { UserPerformanceDatasInterface } from "./models/UserPerformanceDatasInterface";
+import { FormatedSessionDatasInterface, UserSessionDatasInterface } from "./models/UserSessionDatasInterface";
+import { FormatedPerformanceDatasInterface, UserPerformanceDatasInterface } from "./models/UserPerformanceDatasInterface";
 import { useParams } from "react-router";
 import { getUserActivities, getUserAverageSessions, getUserMainDatas, getUserPerformances } from "./Api";
 import Activity from "./components/Activity";
@@ -12,16 +12,17 @@ import Performance from './components/Performance';
 import TodayScore from "./components/TodayScore";
 import DataCard from "./components/DataCard";
 import Loader from "./components/Loader";
+import DataFormater from './formaters/DataFormater';
 
 /**
  * Dashboard Component
  * @returns Dashboard : ReactElement
  */
 export default function Dashboard(): ReactElement {
-    const [userMainDatas, setUserMainDatas] = useState<UserMainDatasInterface>()
+    const [userMainDatas, setUserMainDatas] = useState<FormatedMainDatasInterface>()
     const [userActivities, setUserActivities] = useState<UserActivityDatasInterface>()
-    const [userAverageSessions, setUserAverageSessions] = useState<UserSessionDatasInterface>()
-    const [userPerformances, setUserPerformances] = useState<UserPerformanceDatasInterface>()
+    const [userAverageSessions, setUserAverageSessions] = useState<FormatedSessionDatasInterface>()
+    const [userPerformances, setUserPerformances] = useState<FormatedPerformanceDatasInterface>()
     const { userId } = useParams();
 
     useEffect(() => {
@@ -31,16 +32,16 @@ export default function Dashboard(): ReactElement {
          */
         async function fetchData() {
             if (userId) {
-                const datasResponse: UserMainDatasInterface = await getUserMainDatas(userId);
+                const datasResponse: UserMainDataInterface = await getUserMainDatas(userId);
                 const activitiesResponse: UserActivityDatasInterface = await getUserActivities(userId);
                 const sessionsResponse: UserSessionDatasInterface = await getUserAverageSessions(userId);
                 const performancesResponse: UserPerformanceDatasInterface = await getUserPerformances(userId);
-
+                const dataFormater = new DataFormater();
                 // setting datas to states
-                setUserMainDatas(datasResponse)
+                setUserMainDatas(dataFormater.FormatMainDatas(datasResponse))
                 setUserActivities(activitiesResponse)
-                setUserAverageSessions(sessionsResponse)
-                setUserPerformances(performancesResponse)
+                setUserAverageSessions(dataFormater.FormatSessionsDatas(sessionsResponse))
+                setUserPerformances(dataFormater.FormatPerformancesDatas(performancesResponse))
             }
 
         }
@@ -64,8 +65,8 @@ export default function Dashboard(): ReactElement {
                 </div>
                 <div className='aside'>
                     {userMainDatas && userMainDatas.keyData ? Object.entries(userMainDatas.keyData).map(
-                        (value: { 0: string, 1: any, }) => {
-                            return <DataCard data={value} key={value[0]} />
+                        (value: { 0: string, 1: KeyDatasInterface }) => {
+                            return <DataCard data={value[1]} key={value[0]} />
                         }) : <Loader />}
 
                 </div>
